@@ -135,6 +135,7 @@ function showImage() {
 }
 
 function checkEmotion(chosenEmotion) {
+    let nextPageName = "";
     if (isActive) {
         isActive = false;
         result["endTime"] = performance.now();
@@ -152,14 +153,16 @@ function checkEmotion(chosenEmotion) {
             if (realRounds == 0) {
                 return renderEndPage();
             }
+            nextPageName = "affective conflict resolution task"
         } else {
             praceticeRounds--
             if (praceticeRounds == 0) {
                 return renderWarning();
             }
+            nextPageName = "practice round"
         }
         result = {}
-        resetScreen();
+        resetScreen(nextPageName);
         return generateImage();
     }
 }
@@ -177,30 +180,43 @@ function randomTimer() {
     setTimeout(showImage, rand * 1000);
 }
 
-function resetScreen() {
+function resetScreen(nextPageName) {
     const imageContainer = document.getElementById("imageContainer");
     imageContainer.innerHTML = "";
     const buttonGroup = document.getElementsByClassName("button-group")[0];
     buttonGroup.innerHTML = buttonGroupInnerHTML;
+    const content = document.getElementById("content");
+    content.innerHTML = "";
+    const title = document.getElementsByClassName("title")[0];
+    title.innerText = nextPageName;
 }
 
 function renderInstructions() {
     const imageContainer = document.getElementById("imageContainer");
-    imageContainer.innerHTML = `hello this is the instruction!`;
+    imageContainer.innerHTML = `
+            <img src='https://filedn.com/ltpGl4CBYf5Hf3ADcupJL7B/emostroop_img/sad1.jpeg' alt="">
+            <div class="centered instruction-image-text">HAPPY</div>
+    `;
     const buttonGroup = document.getElementsByClassName("button-group")[0];
-    buttonGroup.innerHTML = `<button class="button" onclick="startTrial();">Start Practice Rounds</button>`;
+    buttonGroup.innerHTML = `
+    <button class="button" onclick="startTrial('practice round');">Start Practice Rounds</button>
+    `;
 }
 
-function startTrial() {
-    resetScreen();
+function startTrial(nextPageName) {
+    resetScreen(nextPageName);
     generateImage();
 }
 
 function renderWarning() {
     const imageContainer = document.getElementById("imageContainer");
-    imageContainer.innerHTML = `hello, clicking the button below will start the real trial!`;
+    imageContainer.innerHTML = ``;
     const buttonGroup = document.getElementsByClassName("button-group")[0];
-    buttonGroup.innerHTML = `<button class="button" onclick="startTrial();">Start</button>`;
+    buttonGroup.innerHTML = `<button class="button" onclick="startTrial('affective conflict resolution task');">Start</button>`;
+    const title = document.getElementsByClassName("title")[0];
+    title.innerHTML = `Warning`;
+    const content = document.getElementById("content");
+    content.innerHTML = `Practice round completed. clicking the button below will start the real trial!`;
 }
 
 function renderEndPage() {
@@ -208,7 +224,8 @@ function renderEndPage() {
     imageContainer.innerHTML = `Thank you for participating in our study.`;
     const buttonGroup = document.getElementsByClassName("button-group")[0];
     buttonGroup.innerHTML = `<button class="button" onclick="sendResults();">End trial</button>`;
-
+    const title = document.getElementsByClassName("title")[0];
+    title.innerHTML = `Task completed`;
 }
 
 function sendResults() {

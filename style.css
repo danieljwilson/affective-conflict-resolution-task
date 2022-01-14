@@ -116,3 +116,11 @@ img {
     grid-column: 2;
     grid-row: 2;
 }
+
+#content {
+    max-width: 600px;
+}
+
+.instruction-image-text {
+    top: 62%;
+}
