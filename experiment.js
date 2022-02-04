@@ -228,10 +228,23 @@ function renderEndPage() {
     title.innerHTML = `Task completed`;
 }
 
-function sendResults() {
-    // dev mode =====
-    console.log(JSON.stringify(resultList));
-    // ======= 
+
+async function sendResults(results) {
+    function handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
+
+    fetch("/save", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: results })
+    })
+        .then(handleErrors)
+        .then(response => console.log("Request complete! response: ", response))
+        .catch(error => console.log("We got an error: ", error));
 }
 
 
