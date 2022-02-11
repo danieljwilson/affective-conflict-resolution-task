@@ -1,0 +1,13 @@
+{
+    "name": "Affective Conflict Resolution Task",
+    "exp_id": "affective-conflict-resolution-task",
+    "description": "A task to click the appropriate button depending on the literal emotion.",
+    "instructions": "Given four emotions, press a button.",
+    "url": "https://github.com/JuneOh710/affective-conflict-resolution-task",
+    "contributors": [
+                     "Daniel J Wilson",
+                     "June Oh"
+                    ], 
+    "time":7,
+    "reference": ["https://www.tandfonline.com/doi/full/10.1080/02699931.2016.1168285"]
+}
