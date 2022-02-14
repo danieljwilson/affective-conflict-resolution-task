@@ -1,8 +1,8 @@
 const resultList = [];
 let result = {};
 let isActive = false;
-let praceticeRounds = 3;
-let realRounds = 3;
+let praceticeRounds = 16;
+let realRounds = 144;
 function setButtonHTML() {
     const angryButton = `<button id="angry" class="button" onclick="checkEmotion('ANGRY');">Angry</button>`;
     const happyButton = `<button id="happy" class="button" onclick="checkEmotion('HAPPY');">Happy</button>`;
