@@ -163,6 +163,23 @@ function checkEmotion(chosenEmotion) {
         }
         result = {}
         resetScreen(nextPageName);
+        if (praceticeRounds != 0) {
+            const title = document.getElementsByClassName("title")[0];
+            if (emotionText != chosenEmotion) {
+                title.innerHTML = `
+                    <span id="incorrect">Incorrect</span>
+                `;
+
+            } else {
+                title.innerHTML = `
+                    <span id="correct">Correct</span>
+                `;
+            }
+            setTimeout(() => {
+                title.innerHTML = `
+                practice round
+            `}, (800));
+        }
         return generateImage();
     }
 }
@@ -216,7 +233,7 @@ function renderWarning() {
     const title = document.getElementsByClassName("title")[0];
     title.innerHTML = `Warning`;
     const content = document.getElementById("content");
-    content.innerHTML = `Practice round completed. clicking the button below will start the real trial!`;
+    content.innerHTML = `<h3>Practice round completed. clicking the button below will start the real trial!</h3>`;
 }
 
 function renderEndPage() {

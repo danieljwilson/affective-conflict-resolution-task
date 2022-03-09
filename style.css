@@ -81,20 +81,28 @@ button {
 
 img {
     filter: grayscale(100%) brightness(150%);
-    height: 400px;
-    width: 400px;
+    height: 390px;
+    width: 390px;
     border-radius: 30px;
     object-fit: cover;
 
+}
+
+#correct {
+    color: green;
+}
+
+#incorrect {
+    color: red;
 }
 
 .centered {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -20%);
     color: white;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .one {
