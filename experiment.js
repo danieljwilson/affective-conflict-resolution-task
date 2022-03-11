@@ -205,7 +205,9 @@ function resetScreen(nextPageName) {
     const content = document.getElementById("content");
     content.innerHTML = "";
     const title = document.getElementsByClassName("title")[0];
-    title.innerText = nextPageName;
+    if (nextPageName != "affective conflict resolution task") {
+        title.innerText = nextPageName;
+    }
 }
 
 function renderInstructions() {
@@ -247,6 +249,12 @@ function renderEndPage() {
 
 
 async function sendResults(results) {
+    const imageContainer = document.getElementById("imageContainer");
+    imageContainer.innerHTML = `You can close this window.`;
+    const buttonGroup = document.getElementsByClassName("button-group")[0];
+    buttonGroup.innerHTML = ``;
+    const title = document.getElementsByClassName("title")[0];
+    title.innerHTML = `Results saved`;
     function handleErrors(response) {
         if (!response.ok) {
             throw Error(response.statusText);
