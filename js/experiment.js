@@ -248,28 +248,32 @@ function renderEndPage() {
 }
 
 
-async function sendResults(results) {
+async function sendResults(data) {
     const imageContainer = document.getElementById("imageContainer");
-    imageContainer.innerHTML = `You can close this window.`;
+    imageContainer.innerHTML = `Thank you for your participation.`;
     const buttonGroup = document.getElementsByClassName("button-group")[0];
     buttonGroup.innerHTML = ``;
     const title = document.getElementsByClassName("title")[0];
     title.innerHTML = `Results saved`;
-    function handleErrors(response) {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response;
-    }
+    $.ajax({
+        type: "POST",
+        url: '/save',
+        data: { "data": data },
+        success: function () { document.location = "/next" },
+        dataType: "application/json",
 
-    fetch("/save", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: results })
-    })
-        .then(handleErrors)
-        .then(response => console.log("Request complete! response: ", response))
-        .catch(error => console.log("We got an error: ", error));
+        // Endpoint not running, local save
+        error: function (err) {
+
+            if (err.status == 200) {
+                document.location = "/next";
+            } else {
+
+                // If error, assue local save
+                console.log("Something went wrong on our end...");
+            }
+        }
+    });
 }
 
 
